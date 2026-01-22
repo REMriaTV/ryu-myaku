@@ -5,8 +5,8 @@
       "name": "中央構造線",
       "nameEn": "Median Tectonic Line",
       "description": "日本最大の断層帯。関東から九州まで約1,000kmにわたって延びる。多くの温泉がこのライン沿いに分布している。",
-      "color": "#ff4444",
-      "lineWidth": 4,
+      "color": "rgba(212, 175, 55, 0.9)",
+      "lineWidth": 3,
       "coordinates": [
         [35.35, 139.05],
         [35.20, 138.50],
@@ -34,8 +34,8 @@
       "name": "糸魚川-静岡構造線",
       "nameEn": "Itoigawa-Shizuoka Tectonic Line",
       "description": "フォッサマグナの西縁を画する大断層。日本を地質学的に東北日本と西南日本に分ける。",
-      "color": "#44aaff",
-      "lineWidth": 4,
+      "color": "rgba(212, 175, 55, 0.8)",
+      "lineWidth": 3,
       "coordinates": [
         [36.99, 137.86],
         [36.70, 137.90],
@@ -53,8 +53,8 @@
       "name": "火山フロント",
       "nameEn": "Volcanic Front",
       "description": "プレートの沈み込みに伴う火山活動の前線。多くの温泉がこのライン沿いに存在する。",
-      "color": "#ff8c00",
-      "lineWidth": 3,
+      "color": "rgba(212, 175, 55, 0.6)",
+      "lineWidth": 2,
       "coordinates": [
         [43.50, 145.50],
         [43.00, 144.50],
@@ -76,11 +76,11 @@
     },
     {
       "id": "sanin-line",
-      "name": "山陰地方の龍脈",
+      "name": "山陰の龍脈",
       "nameEn": "San'in Dragon Line",
       "description": "出雲・三瓶・温泉津など、霊的なエネルギーの強い場所を結ぶライン。",
-      "color": "#9c27b0",
-      "lineWidth": 3,
+      "color": "rgba(212, 175, 55, 0.7)",
+      "lineWidth": 2,
       "coordinates": [
         [35.50, 133.00],
         [35.35, 132.80],
@@ -91,11 +91,11 @@
     },
     {
       "id": "kumano-line",
-      "name": "熊野・紀伊半島の龍脈",
+      "name": "熊野の龍脈",
       "nameEn": "Kumano Dragon Line",
       "description": "熊野三山・十津川・龍神を結ぶ聖なるライン。古来より修験道の聖地。",
-      "color": "#e91e63",
-      "lineWidth": 3,
+      "color": "rgba(212, 175, 55, 0.8)",
+      "lineWidth": 2,
       "coordinates": [
         [33.80, 135.80],
         [33.85, 135.70],

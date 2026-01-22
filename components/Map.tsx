@@ -1,11 +1,11 @@
 'use client'
 
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { Onsen, RyuMyaku } from '@/lib/types'
+import { Onsen } from '@/lib/types'
 
-// Leaflet icon fix - アイコン表示エラー対策
+// Leaflet icon fix
 delete (L.Icon.Default.prototype as any)._getIconUrl
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
@@ -13,131 +13,117 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
 })
 
-// カスタムアイコン（CSSで描画した光る点）
-const createCustomIcon = (prefecture: string) => {
-  // 都道府県に応じた色分け
-  const regionColors: { [key: string]: string } = {
-    '北海道': '#00bcd4', // シアン
-    '和歌山': '#ff5722', // オレンジ
-    '三重': '#ff9800',   // アンバー
-    '島根': '#4caf50',   // グリーン
-    '鳥取': '#8bc34a',   // ライトグリーン
-    '岡山': '#cddc39',   // ライム
-    '兵庫': '#ffeb3b',   // イエロー
-    '奈良': '#e91e63',   // ピンク
-    '熊本': '#f44336',   // レッド
-    '長野': '#9c27b0',   // パープル
-    '神奈川': '#3f51b5', // インディゴ
-  }
-
-  const color = regionColors[prefecture] || '#ffffff'
-
+// マグマ風の脈動マーカー
+const createMagmaIcon = () => {
   return L.divIcon({
-    className: 'glowing-dot-marker',
-    html: `<div style="
-      width: 12px;
-      height: 12px;
-      background: ${color};
-      border-radius: 50%;
-      box-shadow: 0 0 10px ${color}, 0 0 20px ${color}, 0 0 30px ${color};
-      border: 2px solid rgba(255,255,255,0.8);
-    "></div>`,
-    iconSize: [16, 16],
-    iconAnchor: [8, 8],
+    className: 'magma-marker',
+    html: `<div class="magma-pulse"></div>`,
+    iconSize: [12, 12],
+    iconAnchor: [6, 6],
   })
 }
 
 interface MapProps {
   onsenData: Onsen[]
-  ryumyakuData?: RyuMyaku[]
 }
 
-export default function Map({ onsenData, ryumyakuData = [] }: MapProps) {
-  // 中心座標を計算（すべての温泉の中心）
-  const centerLat = onsenData.reduce((sum, onsen) => sum + onsen.lat, 0) / onsenData.length
-  const centerLng = onsenData.reduce((sum, onsen) => sum + onsen.lng, 0) / onsenData.length
+export default function Map({ onsenData }: MapProps) {
+  const center: [number, number] = [36.5, 137.5]
 
   return (
     <MapContainer
-      center={[centerLat, centerLng]}
+      center={center}
       zoom={6}
       style={{ height: '100vh', width: '100%', zIndex: 0 }}
       zoomControl={true}
       scrollWheelZoom={true}
     >
       <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        url="https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png"
+        attribution='&copy; CARTO'
         subdomains="abcd"
         maxZoom={19}
       />
-
-      {/* 龍脈（地質構造線）の描画 */}
-      {ryumyakuData.map((ryumyaku) => (
-        <Polyline
-          key={ryumyaku.id}
-          positions={ryumyaku.coordinates as [number, number][]}
-          pathOptions={{
-            color: ryumyaku.color,
-            weight: 3,
-            opacity: 0.7,
-            dashArray: '10, 5',
-          }}
-        >
-          <Popup>
-            <div style={{ minWidth: '180px' }}>
-              <h3 style={{ margin: '0 0 4px 0', fontSize: '14px', fontWeight: 'bold', color: ryumyaku.color }}>
-                {ryumyaku.name}
-              </h3>
-              <div style={{ fontSize: '11px', color: '#888', marginBottom: '8px' }}>
-                {ryumyaku.nameEn}
-              </div>
-              <p style={{ fontSize: '12px', margin: 0, lineHeight: 1.4 }}>
-                {ryumyaku.description}
-              </p>
-            </div>
-          </Popup>
-        </Polyline>
-      ))}
 
       {/* 温泉マーカー */}
       {onsenData.map((onsen) => (
         <Marker
           key={onsen.id}
           position={[onsen.lat, onsen.lng]}
-          icon={createCustomIcon(onsen.prefecture)}
+          icon={createMagmaIcon()}
         >
           <Popup>
-            <div style={{ minWidth: '200px' }}>
-              <h3 style={{ margin: '0 0 8px 0', fontSize: '16px', fontWeight: 'bold' }}>
+            <div style={{
+              minWidth: '200px',
+              background: '#0a0a0a',
+              color: '#d4af37',
+              padding: '14px',
+              margin: '-13px -20px',
+              fontFamily: 'serif'
+            }}>
+              <h3 style={{
+                margin: '0 0 4px 0',
+                fontSize: '14px',
+                fontWeight: 'normal',
+                letterSpacing: '0.03em'
+              }}>
                 {onsen.displayName}
               </h3>
-              <div style={{ fontSize: '12px', color: '#666', marginBottom: '4px' }}>
+              <div style={{
+                fontSize: '10px',
+                color: 'rgba(212, 175, 55, 0.5)',
+                marginBottom: '10px',
+                borderBottom: '1px solid rgba(212, 175, 55, 0.15)',
+                paddingBottom: '10px'
+              }}>
                 {onsen.prefecture} {onsen.area && `・${onsen.area}`}
               </div>
+
               {onsen.facility && (
-                <div style={{ fontSize: '12px', marginBottom: '4px' }}>
-                  <strong>施設:</strong> {onsen.facility}
+                <div style={{ fontSize: '11px', marginBottom: '4px', color: 'rgba(255,255,255,0.8)' }}>
+                  <span style={{ color: 'rgba(212, 175, 55, 0.6)', fontSize: '9px' }}>湯処</span>　{onsen.facility}
                 </div>
               )}
+
               {onsen.springQuality && (
-                <div style={{ fontSize: '11px', color: '#888', marginBottom: '4px' }}>
+                <div style={{
+                  fontSize: '9px',
+                  color: 'rgba(255,255,255,0.5)',
+                  marginTop: '6px',
+                  padding: '4px 6px',
+                  background: 'rgba(212, 175, 55, 0.08)',
+                  borderRadius: '2px'
+                }}>
                   {onsen.springQuality}
                 </div>
               )}
+
               {onsen.note && (
-                <div style={{ fontSize: '12px', marginTop: '8px', fontStyle: 'italic', color: '#555' }}>
+                <div style={{
+                  fontSize: '10px',
+                  marginTop: '8px',
+                  fontStyle: 'italic',
+                  color: 'rgba(255,255,255,0.6)',
+                  lineHeight: 1.4
+                }}>
                   {onsen.note}
                 </div>
               )}
+
               {onsen.googleMap && (
                 <a
                   href={onsen.googleMap}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ fontSize: '11px', color: '#1976d2', display: 'block', marginTop: '8px' }}
+                  style={{
+                    fontSize: '9px',
+                    color: 'rgba(212, 175, 55, 0.7)',
+                    display: 'block',
+                    marginTop: '10px',
+                    textDecoration: 'none'
+                  }}
                 >
-                  Google Mapで開く →
+                  → 地図で確認
                 </a>
               )}
             </div>

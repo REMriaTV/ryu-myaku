@@ -1,0 +1,111 @@
+{
+  "plates": [
+    {
+      "id": "pacific",
+      "name": "太平洋プレート",
+      "nameEn": "Pacific Plate",
+      "description": "地球最大のプレート。日本海溝で沈み込み、地震と火山活動の源となる。"
+    },
+    {
+      "id": "philippine",
+      "name": "フィリピン海プレート",
+      "nameEn": "Philippine Sea Plate",
+      "description": "南海トラフ・相模トラフで沈み込み、巨大地震の震源となる。"
+    },
+    {
+      "id": "eurasian",
+      "name": "ユーラシアプレート",
+      "nameEn": "Eurasian Plate",
+      "description": "日本列島の西半分を載せる大陸プレート。"
+    },
+    {
+      "id": "north-american",
+      "name": "北米プレート",
+      "nameEn": "North American Plate",
+      "description": "日本列島の東半分を載せる。糸魚川-静岡構造線でユーラシアプレートと接する。"
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "japan-trench",
+      "name": "日本海溝",
+      "nameEn": "Japan Trench",
+      "type": "subduction",
+      "description": "太平洋プレートが沈み込む世界最深級の海溝。東日本大震災の震源。",
+      "color": "rgba(212, 175, 55, 0.4)",
+      "coordinates": [
+        [41.5, 144.5],
+        [40.0, 144.0],
+        [38.5, 143.5],
+        [37.0, 143.5],
+        [35.5, 142.0],
+        [34.0, 141.5]
+      ]
+    },
+    {
+      "id": "nankai-trough",
+      "name": "南海トラフ",
+      "nameEn": "Nankai Trough",
+      "type": "subduction",
+      "description": "フィリピン海プレートが沈み込む。南海トラフ地震の震源域。",
+      "color": "rgba(212, 175, 55, 0.4)",
+      "coordinates": [
+        [34.0, 137.0],
+        [33.5, 136.0],
+        [33.0, 135.0],
+        [32.5, 134.0],
+        [32.0, 133.0],
+        [31.5, 132.0]
+      ]
+    },
+    {
+      "id": "sagami-trough",
+      "name": "相模トラフ",
+      "nameEn": "Sagami Trough",
+      "type": "subduction",
+      "description": "関東大震災の震源。フィリピン海プレートと北米プレートの境界。",
+      "color": "rgba(212, 175, 55, 0.4)",
+      "coordinates": [
+        [35.0, 140.5],
+        [34.5, 140.0],
+        [34.0, 139.5],
+        [34.0, 138.5]
+      ]
+    },
+    {
+      "id": "itoigawa-shizuoka",
+      "name": "糸魚川-静岡構造線",
+      "nameEn": "Itoigawa-Shizuoka Tectonic Line",
+      "type": "fault",
+      "description": "日本列島を東西に分断する大断層。北米プレートとユーラシアプレートの境界。",
+      "color": "rgba(212, 175, 55, 0.6)",
+      "coordinates": [
+        [37.0, 137.8],
+        [36.5, 137.9],
+        [36.0, 138.0],
+        [35.5, 138.2],
+        [35.0, 138.4]
+      ]
+    },
+    {
+      "id": "mtl",
+      "name": "中央構造線",
+      "nameEn": "Median Tectonic Line",
+      "type": "fault",
+      "description": "日本最長の断層。九州から関東まで1000km以上続く。龍脈の主要ライン。",
+      "color": "rgba(212, 175, 55, 0.7)",
+      "coordinates": [
+        [32.8, 130.3],
+        [33.0, 131.0],
+        [33.5, 132.5],
+        [33.8, 133.5],
+        [34.0, 134.0],
+        [34.2, 135.0],
+        [34.5, 136.0],
+        [35.0, 137.5],
+        [35.5, 139.0],
+        [36.0, 140.0]
+      ]
+    }
+  ]
+}

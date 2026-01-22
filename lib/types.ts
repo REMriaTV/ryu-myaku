@@ -30,3 +30,22 @@ export type RyuMyaku = {
 export type OnsenData = {
   onsen: Onsen[]
 }
+
+// プレート境界の型定義
+export type PlateBoundary = {
+  id: string
+  name: string
+  nameEn: string
+  type: 'subduction' | 'fault'
+  description: string
+  color: string
+  coordinates: number[][]
+}
+
+// プレート情報
+export type Plate = {
+  id: string
+  name: string
+  nameEn: string
+  description: string
+}

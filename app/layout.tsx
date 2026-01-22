@@ -1,16 +1,16 @@
 import type { Metadata } from 'next'
-import { Cinzel } from 'next/font/google'
+import { Noto_Serif_JP } from 'next/font/google'
 import './globals.css'
 
-const cinzel = Cinzel({
+const notoSerifJP = Noto_Serif_JP({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  variable: '--font-cinzel',
+  weight: ['300', '400', '500'],
+  variable: '--font-noto-serif-jp',
 })
 
 export const metadata: Metadata = {
-  title: 'RYU-MYAKU - Connect to the Earth\'s Vein',
-  description: '地下で繋がる湯脈（龍脈）を感じる、ダークな温泉マップ',
+  title: '龍脈 RYU-MYAKU',
+  description: '大地の気脈を辿り、龍の息吹に身を清める。日本の温泉と地質構造線を可視化する。',
 }
 
 export default function RootLayout({
@@ -20,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={cinzel.variable}>{children}</body>
+      <body className={notoSerifJP.variable} style={{ margin: 0, padding: 0, background: '#0a0a0a' }}>
+        {children}
+      </body>
     </html>
   )
 }
