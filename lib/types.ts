@@ -23,30 +23,10 @@ export type RyuMyaku = {
   description: string
   color: string
   lineWidth?: number
-  coordinates: number[][]
+  coordinates: number[][] // [lat, lng]の配列
 }
 
-// プレート境界の型定義
-export type PlateBoundary = {
-  id: string
-  name: string
-  nameEn: string
-  type: 'subduction' | 'fault'
-  description: string
-  color: string
-  coordinates: number[][]
-}
-
-// プレート情報
-export type Plate = {
-  id: string
-  name: string
-  nameEn: string
-  description: string
-}
-
-// プレートデータ全体
-export type PlatesData = {
-  plates: Plate[]
-  boundaries: PlateBoundary[]
+// 温泉データのレスポンス型
+export type OnsenData = {
+  onsen: Onsen[]
 }
