@@ -22,7 +22,8 @@ export type RyuMyaku = {
   nameEn: string
   description: string
   color: string
-  coordinates: [number, number][] // [lat, lng]の配列
+  lineWidth?: number
+  coordinates: number[][] // [lat, lng]の配列
 }
 
 // 温泉データのレスポンス型

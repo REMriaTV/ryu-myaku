@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import onsenJson from '@/data/onsen.json'
-import { Onsen } from '@/lib/types'
+import ryumyakuJson from '@/data/ryumyaku.json'
+import { Onsen, RyuMyaku } from '@/lib/types'
 
 // Mapコンポーネントを動的インポート（SSR無効化）
 const Map = dynamic(() => import('@/components/Map'), {
@@ -22,6 +23,7 @@ const Map = dynamic(() => import('@/components/Map'), {
 
 // JSONからデータを取得
 const onsenData: Onsen[] = onsenJson.onsen
+const ryumyakuData: RyuMyaku[] = ryumyakuJson.ryumyaku
 
 export default function RyuMyakuPage() {
   return (
@@ -76,7 +78,7 @@ export default function RyuMyakuPage() {
       </div>
 
       {/* 地図コンポーネント */}
-      <Map onsenData={onsenData} />
+      <Map onsenData={onsenData} ryumyakuData={ryumyakuData} />
     </div>
   )
 }

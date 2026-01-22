@@ -1,9 +1,9 @@
 'use client'
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { Onsen } from '@/lib/types'
+import { Onsen, RyuMyaku } from '@/lib/types'
 
 // Leaflet icon fix - アイコン表示エラー対策
 delete (L.Icon.Default.prototype as any)._getIconUrl
@@ -49,9 +49,10 @@ const createCustomIcon = (prefecture: string) => {
 
 interface MapProps {
   onsenData: Onsen[]
+  ryumyakuData?: RyuMyaku[]
 }
 
-export default function Map({ onsenData }: MapProps) {
+export default function Map({ onsenData, ryumyakuData = [] }: MapProps) {
   // 中心座標を計算（すべての温泉の中心）
   const centerLat = onsenData.reduce((sum, onsen) => sum + onsen.lat, 0) / onsenData.length
   const centerLng = onsenData.reduce((sum, onsen) => sum + onsen.lng, 0) / onsenData.length
@@ -70,6 +71,36 @@ export default function Map({ onsenData }: MapProps) {
         subdomains="abcd"
         maxZoom={19}
       />
+
+      {/* 龍脈（地質構造線）の描画 */}
+      {ryumyakuData.map((ryumyaku) => (
+        <Polyline
+          key={ryumyaku.id}
+          positions={ryumyaku.coordinates as [number, number][]}
+          pathOptions={{
+            color: ryumyaku.color,
+            weight: 3,
+            opacity: 0.7,
+            dashArray: '10, 5',
+          }}
+        >
+          <Popup>
+            <div style={{ minWidth: '180px' }}>
+              <h3 style={{ margin: '0 0 4px 0', fontSize: '14px', fontWeight: 'bold', color: ryumyaku.color }}>
+                {ryumyaku.name}
+              </h3>
+              <div style={{ fontSize: '11px', color: '#888', marginBottom: '8px' }}>
+                {ryumyaku.nameEn}
+              </div>
+              <p style={{ fontSize: '12px', margin: 0, lineHeight: 1.4 }}>
+                {ryumyaku.description}
+              </p>
+            </div>
+          </Popup>
+        </Polyline>
+      ))}
+
+      {/* 温泉マーカー */}
       {onsenData.map((onsen) => (
         <Marker
           key={onsen.id}
