@@ -176,3 +176,164 @@ body {
   color: #ffffff;
   opacity: 1;
 }
+
+/* --- Leaflet Popup Size & Design Override (Safe Mode) --- */
+
+/* 1. 外側の枠（Wrapper）: サイズ固定とデザイン */
+.leaflet-popup-content-wrapper {
+  width: 400px !important;       /* 幅を400pxに固定して広げる */
+  max-width: 85vw !important;    /* スマホでは画面からはみ出さないように */
+  
+  background-color: #0a0a0a !important; /* 漆黒 */
+  color: #fff !important;
+  border: 1px solid rgba(212, 175, 55, 0.5) !important; /* 金の枠線 */
+  border-radius: 8px !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* 2. 中身（Content）: 余白と文字サイズ */
+.leaflet-popup-content {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 20px 24px !important; /* 内側にたっぷりと余白を取る */
+  line-height: 1.8 !important;   /* 行間を広げて読みやすく */
+  font-size: 1rem !important;    /* 文字を少し大きく */
+}
+
+/* 3. タイトル（温泉名） */
+.leaflet-popup-content h3 {
+  font-size: 1.4rem !important;
+  font-weight: bold;
+  margin-bottom: 12px !important;
+  color: #d4af37 !important; /* 金色 */
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  padding-bottom: 8px;
+  font-family: serif; /* 明朝体っぽくして高級感を出す */
+}
+
+/* 4. 閉じるボタン */
+.leaflet-container a.leaflet-popup-close-button {
+  top: 10px !important;
+  right: 10px !important;
+  color: #666 !important;
+  font-size: 24px !important;
+  padding: 4px !important;
+}
+.leaflet-container a.leaflet-popup-close-button:hover {
+  color: #d4af37 !important;
+}
+
+/* 5. 吹き出しの三角（Tip）も黒くする */
+.leaflet-popup-tip {
+  background-color: #0a0a0a !important;
+  border: 1px solid rgba(212, 175, 55, 0.5) !important;
+  box-shadow: none !important;
+}
+
+/* --- ポップアップ内の本文テキストサイズ強制変更（詳細度最大化） --- */
+
+/* 6. ポップアップ内のすべてのdiv要素（インラインスタイル上書き） */
+.leaflet-popup-content-wrapper .leaflet-popup-content > div,
+.leaflet-popup-content-wrapper .leaflet-popup-content div[style],
+.leaflet-popup-content-wrapper .leaflet-popup-content > div[style] {
+  font-size: 1.125rem !important; /* 18px */
+  line-height: 1.8 !important;
+  color: #e5e5e5 !important; /* オフホワイト */
+}
+
+/* 7. ポップアップ内のすべてのp要素 */
+.leaflet-popup-content-wrapper .leaflet-popup-content p,
+.leaflet-popup-content-wrapper .leaflet-popup-content p[style] {
+  font-size: 1.125rem !important; /* 18px */
+  line-height: 1.8 !important;
+  color: #e5e5e5 !important;
+  margin-bottom: 12px !important;
+}
+
+/* 8. ポップアップ内のすべてのspan要素 */
+.leaflet-popup-content-wrapper .leaflet-popup-content span,
+.leaflet-popup-content-wrapper .leaflet-popup-content span[style] {
+  font-size: 1.125rem !important; /* 18px */
+  line-height: 1.8 !important;
+  color: #e5e5e5 !important;
+}
+
+/* 9. 住所・メタ情報（都道府県・エリア）のdiv */
+.leaflet-popup-content-wrapper .leaflet-popup-content > div:not(:first-child):not(:has(h3)),
+.leaflet-popup-content-wrapper .leaflet-popup-content > div[style]:not(:first-child) {
+  font-size: 1rem !important; /* 16px */
+  line-height: 1.8 !important;
+  color: rgba(212, 175, 55, 0.7) !important; /* 金色を少し薄く */
+}
+
+/* 10. 湯処情報のdiv */
+.leaflet-popup-content-wrapper .leaflet-popup-content > div:has(span:contains('湯処')),
+.leaflet-popup-content-wrapper .leaflet-popup-content > div[style]:has(span) {
+  font-size: 1rem !important; /* 16px */
+  line-height: 1.8 !important;
+  color: #e5e5e5 !important;
+}
+
+/* 11. 泉質情報のdiv */
+.leaflet-popup-content-wrapper .leaflet-popup-content > div[style*="background"] {
+  font-size: 1rem !important; /* 16px */
+  line-height: 1.8 !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  padding: 8px 12px !important;
+}
+
+/* 12. メモ・ノートのdiv */
+.leaflet-popup-content-wrapper .leaflet-popup-content > div[style*="italic"],
+.leaflet-popup-content-wrapper .leaflet-popup-content > div[style*="fontStyle"] {
+  font-size: 1.125rem !important; /* 18px */
+  line-height: 1.8 !important;
+  color: #e5e5e5 !important;
+  font-style: italic !important;
+}
+
+/* 13. リンク（地図で確認） */
+.leaflet-popup-content-wrapper .leaflet-popup-content a,
+.leaflet-popup-content-wrapper .leaflet-popup-content a[style] {
+  font-size: 1rem !important; /* 16px */
+  line-height: 1.8 !important;
+  color: rgba(212, 175, 55, 0.9) !important;
+  text-decoration: none !important;
+  transition: color 0.2s !important;
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content a:hover {
+  color: #d4af37 !important;
+}
+
+/* 14. より詳細度を上げたセレクタ（bodyやhtmlを含む） */
+body .leaflet-popup-content-wrapper .leaflet-popup-content > div[style],
+body .leaflet-popup-content-wrapper .leaflet-popup-content div[style],
+html body .leaflet-popup-content-wrapper .leaflet-popup-content > div[style] {
+  font-size: 1.125rem !important; /* 18px */
+  line-height: 1.8 !important;
+  color: #e5e5e5 !important;
+}
+
+/* 15. タイトル（h3）は現状維持（金色、大きめ） */
+.leaflet-popup-content-wrapper .leaflet-popup-content h3,
+.leaflet-popup-content-wrapper .leaflet-popup-content h3[style] {
+  font-size: 1.4rem !important;
+  font-weight: bold !important;
+  margin-bottom: 12px !important;
+  color: #d4af37 !important; /* 金色 */
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3) !important;
+  padding-bottom: 8px !important;
+  font-family: serif !important;
+  line-height: 1.4 !important;
+}
+
+/* 16. すべてのテキストノードを含む包括的なルール */
+.leaflet-popup-content-wrapper .leaflet-popup-content * {
+  font-size: inherit !important;
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+  font-size: 1.125rem !important; /* デフォルトを18pxに */
+  line-height: 1.8 !important;
+  color: #e5e5e5 !important;
+}
