@@ -1,0 +1,80 @@
+# RYU-MYAKU Project - Cursor Rules
+
+## Project Overview
+龍脈（RYU-MYAKU）- 日本の温泉と地球のエネルギーライン（龍脈）を可視化する地図アプリケーション
+
+## Tech Stack
+- Next.js 14 (App Router)
+- TypeScript (strict mode)
+- Tailwind CSS
+- Leaflet + react-leaflet (地図表示)
+- Supabase (データベース - 予定)
+
+## Code Style
+
+### TypeScript
+- 厳密な型定義を使用（any禁止）
+- interfaceよりtypeを優先
+- 温泉・龍脈データには専用の型を定義
+
+```typescript
+type OnsenRank = 'S' | 'A' | 'B' | 'C'
+
+type Onsen = {
+  id: string
+  name: string
+  rank: OnsenRank
+  lat: number
+  lng: number
+  prefecture: string
+  note?: string
+  ryumyaku?: string // 関連する龍脈
+}
+
+type RyuMyaku = {
+  id: string
+  name: string
+  coordinates: [number, number][] // 龍脈のライン座標
+  color: string
+  description?: string
+}
+```
+
+### React/Next.js
+- Server Componentsをデフォルトで使用
+- 地図コンポーネントは`dynamic import`でSSR無効化
+- クライアントコンポーネントは最小限に
+
+### Leaflet
+- Mapコンポーネントは`@/components/Map`に集約
+- カスタムマーカーはランク別に色分け
+- 龍脈ラインはPolylineで描画
+
+## File Structure
+```
+app/
+  ryu-myaku/
+    page.tsx        # メインページ
+  layout.tsx
+  globals.css
+components/
+  Map.tsx           # 地図コンポーネント
+  OnsenMarker.tsx   # 温泉マーカー
+  RyuMyakuLine.tsx  # 龍脈ライン
+lib/
+  supabase.ts       # Supabaseクライアント
+  types.ts          # 型定義
+data/
+  onsen.json        # 温泉データ（一時的）
+  ryumyaku.json     # 龍脈データ
+```
+
+## Development Commands
+- `npm run dev` - 開発サーバー起動
+- `npm run build` - プロダクションビルド
+- `npm run lint` - ESLint実行
+
+## Important Notes
+- 地図のデフォルト中心は日本（lat: 36.5, lng: 138.0）
+- 龍脈データは中央構造線、フォッサマグナなどの地質構造線を参考に
+- 温泉ランクは泉質・歴史・アクセスを総合評価

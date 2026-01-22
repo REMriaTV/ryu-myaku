@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Leaflet CSS */
+@import 'leaflet/dist/leaflet.css';
+
+/* Leaflet icon fix */
+.leaflet-container {
+  background: #000;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #1a1a1a;
+  color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.8);
+}
+
+.leaflet-popup-content {
+  margin: 12px 16px;
+  font-family: var(--font-cinzel), serif;
+}
+
+.leaflet-popup-tip {
+  background: #1a1a1a;
+}
+
+.leaflet-popup-close-button {
+  color: #ffffff;
+  font-size: 20px;
+  padding: 4px 8px;
+}
+
+.leaflet-popup-close-button:hover {
+  color: #cccccc;
+}
+
+/* Glowing Dot Marker Styles */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+.pin-s,
+.pin-b,
+.pin-c {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  position: relative;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Rank S: マグマのような赤〜オレンジのグラデーション */
+.pin-s {
+  background: radial-gradient(circle at 30% 30%, #ff6b35, #ff4500, #cc3300);
+  box-shadow: 
+    0 0 10px rgba(255, 107, 53, 0.8),
+    0 0 20px rgba(255, 69, 0, 0.6),
+    0 0 30px rgba(255, 69, 0, 0.4),
+    inset 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Rank B: 神秘的なシアン〜青 */
+.pin-b {
+  background: radial-gradient(circle at 30% 30%, #00d4ff, #0099cc, #0066aa);
+  box-shadow: 
+    0 0 10px rgba(0, 212, 255, 0.8),
+    0 0 20px rgba(0, 153, 204, 0.6),
+    0 0 30px rgba(0, 153, 204, 0.4),
+    inset 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Rank C: 控えめな白〜グレー */
+.pin-c {
+  background: radial-gradient(circle at 30% 30%, #ffffff, #cccccc, #999999);
+  box-shadow: 
+    0 0 8px rgba(255, 255, 255, 0.6),
+    0 0 16px rgba(255, 255, 255, 0.4),
+    0 0 24px rgba(255, 255, 255, 0.2),
+    inset 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+/* Leaflet marker container */
+.leaflet-marker-icon {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Custom marker popup styles - SFチックに洗練 */
+.onsen-popup {
+  font-family: var(--font-cinzel), serif;
+  background: transparent;
+}
+
+.onsen-popup h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.onsen-popup .rank {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+
+.onsen-popup .rank-S {
+  background: rgba(255, 107, 53, 0.15);
+  color: #ff6b35;
+  border-color: #ff6b35;
+  box-shadow: 0 0 8px rgba(255, 107, 53, 0.4);
+}
+
+.onsen-popup .rank-B {
+  background: rgba(0, 212, 255, 0.15);
+  color: #00d4ff;
+  border-color: #00d4ff;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+}
+
+.onsen-popup .rank-C {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.onsen-popup .note {
+  font-size: 13px;
+  color: #b0b0b0;
+  margin-top: 8px;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+/* SFチックなポップアップデザイン */
+.leaflet-popup-content-wrapper {
+  background: rgba(10, 10, 10, 0.95);
+  color: #ffffff;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 0 20px rgba(0, 0, 0, 0.9),
+    inset 0 0 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.leaflet-popup-content {
+  margin: 16px 20px;
+  font-family: var(--font-cinzel), serif;
+}
+
+.leaflet-popup-tip {
+  background: rgba(10, 10, 10, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.leaflet-popup-close-button {
+  color: #ffffff;
+  font-size: 18px;
+  padding: 4px 8px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.leaflet-popup-close-button:hover {
+  color: #ffffff;
+  opacity: 1;
+}
